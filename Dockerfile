@@ -1,9 +1,9 @@
-FROM golang:1.13.5-alpine3.10 as builder
+FROM golang:1.13.6-alpine3.11 as builder
 ARG METABIGOR_VERSION=v1.0
 RUN apk add git
 RUN GOOS=linux go get -v -ldflags "-linkmode external -extldflags -static" -u github.com/j3ssie/metabigor
 
-FROM alpine:3.10
+FROM alpine:3.11.2
 WORKDIR /
 COPY --from=builder /go/bin/metabigor .
 ENTRYPOINT ["/metabigor"]
