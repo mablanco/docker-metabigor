@@ -1,5 +1,4 @@
 FROM golang:1.13.6-alpine3.11 as builder
-ARG METABIGOR_VERSION=v1.0
 RUN apk add git
 RUN GOOS=linux go get -v -ldflags "-linkmode external -extldflags -static" -u github.com/j3ssie/metabigor
 
