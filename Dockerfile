@@ -1,6 +1,8 @@
 FROM golang:1.15.5-alpine3.12 as builder
+ENV GO111MODULE=on \
+    GOOS=linux
 RUN apk add git gcc libc-dev
-RUN GOOS=linux go get -v -ldflags "-linkmode external -extldflags -static" -u github.com/j3ssie/metabigor
+RUN go get -v -ldflags "-linkmode external -extldflags -static" -u github.com/j3ssie/metabigor
 
 FROM alpine:3.12.1
 WORKDIR /
