@@ -10,7 +10,7 @@ This command will run Metabigor with no parameters, thus showing its inline help
 
     $ docker run --rm mablanco/metabigor
 
-This command will discovery IP of ASN:
+This command will discover the IPs of a company/organization:
 
     $ echo "company" | docker run -i --rm mablanco/metabigor net --org
 
