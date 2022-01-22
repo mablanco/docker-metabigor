@@ -5,5 +5,6 @@ RUN go get -v -ldflags "-linkmode external -extldflags -static" -u github.com/j3
 
 FROM alpine:3.15.0
 WORKDIR /
+RUN apk upgrade --no-cache
 COPY --from=builder /go/bin/metabigor .
 ENTRYPOINT ["/metabigor"]
