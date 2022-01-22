@@ -3,7 +3,7 @@ ENV GOOS=linux
 RUN apk add git gcc libc-dev
 RUN go get -v -ldflags "-linkmode external -extldflags -static" -u github.com/j3ssie/metabigor
 
-FROM alpine:3.5.0
+FROM alpine:3.15.0
 WORKDIR /
 COPY --from=builder /go/bin/metabigor .
 ENTRYPOINT ["/metabigor"]
