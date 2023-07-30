@@ -15,3 +15,13 @@ This command will discover the IPs of a company/organization:
     $ echo "company" | docker run -i --rm mablanco/metabigor net --org
 
 There are more usage examples at <https://github.com/j3ssie/metabigor#example-commands>
+
+## How to build the image
+
+Use the following command to build the image with the `latest` tag and the Metabigor version specified in the Dockerfile:
+
+    $ docker build -t mablanco/metabigor .
+
+In case you want to build a different version, browse the available releases at <https://github.com/j3ssie/metabigor/releases> and then use this command:
+
+    $ docker build --build-arg METABIGOR_VERSION=<version> --build-arg -t mablanco/metabigor:<version> .
