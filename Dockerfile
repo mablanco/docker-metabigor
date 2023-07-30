@@ -1,4 +1,4 @@
-FROM golang:1.17.6-alpine3.15 as builder
+FROM golang:1.20.6-alpine3.18 as builder
 ENV GOOS=linux
 RUN apk add git gcc libc-dev
 RUN go get -v -ldflags "-linkmode external -extldflags -static" -u github.com/j3ssie/metabigor
