@@ -1,10 +1,9 @@
-FROM golang:1.20.6-alpine3.18 as builder
-ENV GOOS=linux
-ARG METABIGOR_VERSION=v1.2.5
+FROM golang:1.21.6-alpine3.19 AS builder
+ARG METABIGOR_VERSION=v2.0.0
 RUN apk add git gcc libc-dev
-RUN go install -ldflags "-linkmode external -extldflags -static" github.com/j3ssie/metabigor@$METABIGOR_VERSION
+RUN git clone --depth 1 --branch $METABIGOR_VERSION https://github.com/j3ssie/metabigor.git
+RUN cd metabigor && go install
 
-FROM scratch
-WORKDIR /
-COPY --from=builder /go/bin/metabigor .
-ENTRYPOINT ["/metabigor"]
+FROM alpine:3.20.3
+COPY --from=builder /go/bin/metabigor /bin/metabigor
+ENTRYPOINT ["/bin/metabigor"]
