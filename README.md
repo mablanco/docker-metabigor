@@ -1,6 +1,6 @@
 # docker-metabigor
 
-Docker image for Metabigor, an Intelligence Framework to do OSINT tasks and more but without any API key (<https://github.com/j3ssie/metabigor>). This is a multistage Docker image that first compiles the Golang source code and then builds an image from scratch that hosts the resulting executable.
+Docker image for Metabigor, an Intelligence Framework to do OSINT tasks and more but without any API key (<https://github.com/j3ssie/metabigor>). This is a multistage Docker image that first compiles the Golang source code and then builds an Alpine-based image that hosts the resulting executable.
 
 ## How to use this image
 
@@ -14,7 +14,11 @@ This command will discover the IPs of a company/organization:
 
     $ echo "company" | docker run -i --rm mablanco/metabigor net --org
 
-There are more usage examples at <https://github.com/j3ssie/metabigor#example-commands>
+The `net` command uses a local ASN database that Metabigor extracts to `/root/.metabigor` the first time it runs (about 100 MB). Mount a volume there to keep it between runs:
+
+    $ docker run --rm -v metabigor-data:/root/.metabigor mablanco/metabigor net AS13335
+
+There are more usage examples at <https://github.com/j3ssie/metabigor#commands>
 
 ## How to build the image
 
@@ -24,4 +28,4 @@ Use the following command to build the image with the `latest` tag and the Metab
 
 In case you want to build a different version, browse the available releases at <https://github.com/j3ssie/metabigor/releases> and then use this command:
 
-    $ docker build --build-arg METABIGOR_VERSION=<version> --build-arg -t mablanco/metabigor:<version> .
+    $ docker build --build-arg METABIGOR_VERSION=<version> -t mablanco/metabigor:<version> .
