@@ -7,3 +7,5 @@ RUN cd metabigor && CGO_ENABLED=0 go build -trimpath -ldflags "-s -w" -o /go/bin
 FROM alpine:3.24.3
 COPY --from=builder /go/bin/metabigor /bin/metabigor
 ENTRYPOINT ["/bin/metabigor"]
+
+# Layer cache test, do not merge
